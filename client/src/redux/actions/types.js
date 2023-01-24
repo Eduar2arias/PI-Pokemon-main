@@ -1,0 +1,15 @@
+const GET_POKEMON = "GET_POKEMON"
+const GET_BY_NAME = "GET_BY_NAME"
+const GET_BY_ID = "GET_BY_ID"
+const SET_FILTER = "SET_FILTER"
+const GET_TYPES = "GET_TYPES"
+
+
+
+export{
+    GET_POKEMON,
+    GET_BY_NAME,
+    GET_BY_ID,
+    SET_FILTER,
+    GET_TYPES
+}

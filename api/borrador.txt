@@ -1,0 +1,99 @@
+// pokemon route get 
+
+const { Router } = require("express");
+const axios = require("axios");
+const { Pokemon, Type } = require("../db");
+
+const pokemonRoute = Router();
+
+
+let sendResult = [];
+pokemonRoute
+  .get("/", async (req, res) => {
+    console.log(sendResult);
+    const { name } = req.query;
+
+    if (name) {
+      Pokemon.findAll({ where: { name } })
+        .then((data) => {
+          if (data.length) {
+            return res.status(200).json(data);
+          } else {
+            axios(`https://pokeapi.co/api/v2/pokemon/${name}`).then((data) => {
+              console.log(data.data);
+              res.status(200).json(data.data);
+            });
+          }
+        })
+        .catch((err) => res.status(404).json(err.message));
+    } else {
+      try {
+        const resultDB = await Pokemon.findAll({
+          attributes: ["name", "id"],include:{model:Type}
+        });
+
+        const resultAPi = await axios.get("https://pokeapi.co/api/v2/pokemon");
+        const arrPokemons = await Promise.all(
+          resultAPi.data.results.map(async (character) => {
+            const name = character.name;
+            const id = await axios.get(character.url);
+            return {
+              name,
+              id: id.data.id,
+              url: character.url,
+  
+            };
+          })
+        );
+        // sendResult = [...resultDB, ...arrPokemons];
+        res.status(200).send([...resultDB, ...arrPokemons]);
+      } catch (error) {
+        res.status(404).json(error.message);
+      }
+    }
+  })
+
+  .get("/:id", async (req, res) => {
+    const { id } = req.params;
+    if (id.length > 5) {
+      Pokemon.findByPk(id)
+        .then((data) => res.status(200).json(data))
+        .catch((err) => err.message);
+    } else {
+      axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`).then((data) => {
+        let objDetail = {
+          name: data.data.name,
+          id: data.data.id,
+          weigth: data.data.weigth,
+          heigth: data.data.heigth,
+          image: data.data.sprites,
+          stats: data.data.stats,
+          types: data.data.types,
+        };
+        delete objDetail.image.other;
+        delete objDetail.image.versions;
+
+        return res.status(200).send(objDetail);
+      });
+    }
+
+  })
+
+  .post("/", (req, res) => {
+    const { name, type } = req.body;
+    Pokemon.create({ name }).then((datapokemon) => {
+
+      Type.findAll({ where: { name: type } }).then((data) => {
+        
+        console.log(data);
+        datapokemon.addType(data);
+      });
+      console.log(datapokemon);
+      return res.status(200).json(datapokemon);
+    });
+  });
+
+module.exports = {
+  pokemonRoute,
+  sendResult
+}

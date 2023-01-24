@@ -1,0 +1,18 @@
+
+
+
+//NOS TRAEMOS TODOS POR GLOBAL , LOS POKEMONES , EL PREVIEW  Y EL NEXT // CREAOS UNA FUNCION QUE ALTERE EL ESTADO 
+//REDERIZAR SI HAY ALGO EN EL NEXT O EN EL PREVIEW 
+
+la guardamos en un estaodo local 
+creamos estado para current page
+
+
+
+
+// agrego un pokemon 
+
+en global find 
+
+
+cuando 
