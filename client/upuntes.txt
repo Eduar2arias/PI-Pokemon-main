@@ -16,3 +16,13 @@ en global find
 
 
 cuando 
+
+
+
+menu lateral 
+** lista de todos lo pokemones (total de pokemon por typo )
+
+
+//crear un componente paginado
+
+

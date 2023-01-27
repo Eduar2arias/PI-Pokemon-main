@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Route } from "react-router-dom";
-import InfoById from "../pokemons/infoById";
+import InfoById from "../detalle/infoById";
 import Createpokemon from "../Forms/Createpokemon";
 import PokemonDetaill from "../pokemons/PokemonDetaill";
 import Pokemon from "../pokemons/Pokemons";
@@ -27,7 +27,7 @@ export default function Home(props) {
         <Link to="/home/create">Create Pokemon</Link>
         <Menu/>
       </section>
-
+      <hr/>
       <section>
         <Route path="/home/pokemons">
           <Pokemon />

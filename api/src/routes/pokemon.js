@@ -1,8 +1,10 @@
 const { Router } = require("express");
 const axios = require("axios");
+// const { Pokemon, Type } = require("../db");
+// const { getPokemon , getById , postPokenon} = require("../controllers/pokemon.controlls");
 const { Pokemon, Type } = require("../db");
 const { getPokemon , getById , postPokenon} = require("../controllers/pokemon.controlls");
-
+const {getPokemonHandler ,getByIdHandler} = require('../handlers/pokemon.handler')
 const pokemonRoute = Router();
 
 function fnResolve(res, codigo, data) {
@@ -14,19 +16,24 @@ function fnReject(res, codigo, data) {
 
 let sendResult = [];
 pokemonRoute
-  .get("/", (req, res) => {
-    let result = getPokemon(req, Pokemon,Type);
-    result
-      .then((data) => fnResolve(res, 200, data))
-      .catch((err) => res.status(404).json({err:'no se encontro data'}) );
-  })
+  // .get("/", getPokemonHandler)
+  .get("/", getPokemonHandler)
+  // .get("/", (req, res) => {
+  //   let result = getPokemon(req, Pokemon,Type);
+  //   result
+  //     .then((data) => fnResolve(res, 200, data))
+  //     .catch((err) => res.status(404).json(err.message) );
+  // })
 
-  .get("/:id", (req , res)=> {
-    const result = getById(req , Pokemon)
-    result
-    .then( data => fnResolve( res,200,data) )
-    .catch( err => fnReject( res,404,err) )
-  })
+
+  .get("/:id",getByIdHandler)
+
+  // .get("/:id", (req , res)=> {
+  //   const result = getById(req , Pokemon)
+  //   result
+  //   .then( data => fnResolve( res,200,data) )
+  //   .catch( err => fnReject( res,404,err) )
+  // })
 
   .post("/", (req, res) => {
     const result = postPokenon(req , Pokemon , Type)

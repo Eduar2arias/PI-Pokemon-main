@@ -3,6 +3,8 @@ const GET_BY_NAME = "GET_BY_NAME"
 const GET_BY_ID = "GET_BY_ID"
 const SET_FILTER = "SET_FILTER"
 const GET_TYPES = "GET_TYPES"
+const GET_CREATED = "GET_CREATED"
+const GET_SORT = "GET_SORT"
 
 
 
@@ -11,5 +13,7 @@ export{
     GET_BY_NAME,
     GET_BY_ID,
     SET_FILTER,
-    GET_TYPES
+    GET_TYPES,
+    GET_CREATED,
+    GET_SORT
 }

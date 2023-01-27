@@ -5,13 +5,13 @@ import { connect } from "react-redux";
 import { getPokemon } from "./redux/actions/action";
 import React from "react";
 
-export function App(props) {
+export default function App(props) {
   // const {Pokemon} = props
   
-  React.useEffect( ()=>{
-    console.log('me subo')
-      props.getPokemon()
-  },[])
+  // React.useEffect( ()=>{
+  //   console.log('me subo')
+  //     props.getPokemon()
+  // },[])
   return (
     <div className="App">
       <Route path="/" exact>
@@ -34,12 +34,12 @@ export function App(props) {
 //   };
 // };
 
-export const mapDispatchToProps = (dispatch) => {
-  return {
-    getPokemon: () => dispatch(getPokemon()),
-  };
-};
+// export const mapDispatchToProps = (dispatch) => {
+//   return {
+//     getPokemon: () => dispatch(getPokemon()),
+//   };
+// };
 
-export default connect(null, mapDispatchToProps)(App);
+// export default connect(null, mapDispatchToProps)(App);
 
 
