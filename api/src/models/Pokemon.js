@@ -14,6 +14,12 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique:true
     },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue:DataTypes.UUIDV1,
+      
+    },
     life:{
       type:DataTypes.INTEGER,
       validate:{
@@ -24,13 +30,16 @@ module.exports = (sequelize) => {
     stroke:{
       type:DataTypes.FLOAT
     },
+    defense:{
+      type:DataTypes.FLOAT
+    },
     speed:{
       type:DataTypes.FLOAT
     },
-    heigth:{
+    height:{
       type:DataTypes.FLOAT
     },
-    weigth:{
+    weight:{
       type:DataTypes.FLOAT
     },
   },

@@ -6,44 +6,58 @@ import PokemonDetaill from "../pokemons/PokemonDetaill";
 import Pokemon from "../pokemons/Pokemons";
 import SearchByName from "../searchs/SearchByName";
 import Menu from "./menu";
-import {useDispatch} from 'react-redux'
-import {getPokemon} from '../../redux/actions/action.js'
+import { useDispatch } from "react-redux";
+import { getPokemon } from "../../redux/actions/action.js";
 import PokemonFilter from "../pokemons/PokemonFilter";
+import style from "./home.module.css";
+import Favorites from "../favorites/Favorites";
 
 export default function Home(props) {
-  const dispatch = useDispatch()
-  const fnSearchByname = (name)=> {
-    dispatch(getPokemon(name))
-  }
+
+  
+  const dispatch = useDispatch();
+  const fnSearchByname = (name) => {
+    dispatch(getPokemon(name));
+  };
   return (
     <div>
-      <Link to="/">
-        <input type="button" value="main" />
-      </Link>
-      <SearchByName fnSearchByname={fnSearchByname}/>
-      <hr />
-      <section>
-        <Link to="/home/pokemons">Pokemon</Link>
-        <Link to="/home/create">Create Pokemon</Link>
-        <Menu/>
+      <section className={style.containHeader}>
+      <div className={style.header}>
+        
+      </div>
+        <SearchByName fnSearchByname={fnSearchByname} />
+
       </section>
-      <hr/>
-      <section>
-        <Route path="/home/pokemons">
-          <Pokemon />
-        </Route>
-        <Route path="/home/detalle/:name">
-          <PokemonDetaill />
-        </Route>
-        <Route path="/home/create">
-          <Createpokemon />
-        </Route>
-        <Route path="/home/info/:id">
-          <InfoById />
-        </Route>
-        <Route path='/home/f/types'>
-          <PokemonFilter/>
-        </Route>  
+      <section className={style.frame}>
+        <div className={style.menu}>
+          <Link className={style.link} to="/">index</Link>
+          <Link className={style.link} to="/home/pokemons">All Pokemon</Link>
+          <Link className={style.link} to="/home/create">Create Pokemon</Link>
+          <Link className={style.link} to="/home/favorites">Favorites</Link>
+          <Menu />
+        </div>
+        <section className={style.render}>
+          <Route path="/home/pokemons">
+            <Pokemon />
+          </Route>
+         
+          <Route path="/home/create">
+            <Createpokemon />
+          </Route>
+          <Route path="/home/favorites">
+            <Favorites/>
+          </Route>
+
+          <Route path="/home/detalle/:name">
+            <PokemonDetaill />
+          </Route>
+          <Route path="/home/info/:id">
+            <InfoById />
+          </Route>
+          <Route path="/home/f/types">
+            <PokemonFilter />
+          </Route>
+        </section>
       </section>
     </div>
   );

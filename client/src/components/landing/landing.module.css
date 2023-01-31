@@ -1,0 +1,45 @@
+.bground {
+    background-image: url('../../assets/landing.jpg');
+    width:100%;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.first {
+    width: 100%;
+    height: 50vh;
+}
+
+.first img {
+    width: 40%;
+}
+
+
+.second {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.styleLink{
+
+    text-decoration: none;
+    color: black;
+    border: 4px solid black;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    font-size: 50px;
+
+}
+
+.styleLink:hover{
+    color: white;
+    background-color: rgb(255,0,0)
+}

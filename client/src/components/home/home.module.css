@@ -1,0 +1,55 @@
+.containHeader{
+
+    background-color:#4b77ff;
+}
+
+.header{
+    background-image: url('../../assets/International_Pokémon_logo.svg.webp');
+    /* background-size: 100% 90%; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 40vh;
+    background-position: center;
+    /* object-fit: contain; */
+}
+
+
+.frame{
+    display: flex;
+    
+}
+
+
+.menu{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    min-height: 100vh;
+    background-color: #9eb6ff;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.link {
+    text-decoration: none;
+    color: #000;
+    width: 80%;
+    border-radius: 15px;
+    border: 1px solid none;
+    justify-content: center;
+    margin: 0.5rem 0 ;
+    padding: 0.5rem 0;
+}
+
+.link:hover{
+    background-color:#fedf06;
+}
+
+.render{
+    width: 80%;
+    border: 5px double black;
+    background-color: #fffdc7;
+    
+}

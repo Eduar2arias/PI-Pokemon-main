@@ -1,9 +1,10 @@
 .container {
     max-width: 800px;
+    width: 70%;
     display: flex;
     margin:   0 auto;
     margin-top: 2% ;
-    margin-bottom: 2%;
+    /* margin-bottom: 2%; */
     background-color: rgb(129, 231, 222);
     
     border:2px solid black ;
@@ -22,12 +23,15 @@
     width: 100%;
     background-color: rgb(254, 91, 55);
     margin-top: 10px;
+    border: 5px double black;
 
 }
 
 .mid{
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .img  {
     width: 50%;
@@ -40,13 +44,70 @@
     
 }
 
+.contents{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
 
+.contentsChild {
+    width: 80%;
+}
+.contents  fieldset{
+    border: 3px solid black;
+    width: 100%;
+    background-color: antiquewhite;
+    border-radius: 5px;
+}
+
+.contents legend {
+    
+    font-weight: bolder;
+    margin-left: 30px;
+}
+.infoFieldset{
+    font-weight: bold;
+    display: inline-block;
+    width: 50%;
+}
+.containerHeart{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.heart{
+    
+    clip-path: polygon(31.57% 59.33%, 27.72% 54.07%, 24.29% 48.53%, 24.29% 41.4%, 27.72% 35.15%, 32.82% 31.08%, 38.57% 28.93%, 44.64% 29.93%, 50.16% 32.82%, 58.28% 29.38%, 62.78% 28.17%, 70.61% 29.93%, 76.01% 35.86%, 77.06% 41.95%, 75.61% 47.95%, 72.87% 55.18%, 64.69% 62.94%, 51.56% 75.41%, 44.64% 69.84%, 35.42% 64.59%);
+    background-color: #17cd2f;
+    border-color: black;
+    color: black;
+    font-weight: bolder;
+    font-size: 50px;
+    width: 50px;
+    height: 70px;
+    margin: 0 auto;
+
+}
+
+
+.heart:hover{
+    background-color: aliceblue;
+}
+
+.heartActive{
+    background-color: red;
+}
+
+/* ?  */
 .containerType{
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
     align-items: center;
     width: 100%;
+    border: 5px double black;
 }
 .typeText {
     /* display: inline; */
@@ -83,8 +144,44 @@
     background-color: antiquewhite;
 }
 
-.icono{
-    
-    font-size: 50px;
-}
 
+
+/* <!DOCTYPE html>
+<html>
+  
+<head>
+    <style>
+        /* Adding some basic styling to button */
+          
+        /* .btn {
+            text-decoration: none;
+            border: none;
+            padding: 12px 40px;
+            font-size: 16px;
+            background-color: green;
+            color: #fff;
+            border-radius: 5px;
+            box-shadow: 7px 6px 28px 1px rgba(0, 0, 0, 0.24);
+            cursor: pointer;
+            outline: none;
+            transition: 0.2s all;
+        }
+        /* Adding transformation when the button is active */
+/*           
+        .btn:active {
+            /* transform: scale(0.98);
+            /* Scaling button to 0.98 to its original size */
+            /* box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24); */
+            /* Lowering the shadow */
+        /* } */
+    /* </style>
+</head> */
+  
+/* <body>
+  
+    <!-- Button with a class 'btn' -->
+    <button class="btn">Button</button>
+  
+</body> */
+  
+/* </html> */ 

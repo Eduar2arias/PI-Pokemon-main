@@ -3,7 +3,7 @@ import React from "react";
 export default function Checkboxs({changeCheck}) {
   return (
     <>
-      <label htmlFor="types[]" onChange={(e) => console.log(e.target)}>
+      <label  onChange={(e) => console.log(e.target)}>
         Tipos
       </label>
       <input
@@ -149,3 +149,226 @@ export default function Checkboxs({changeCheck}) {
     </>
   );
 }
+
+
+// <div>
+// <label htmlFor="id">Id</label>
+// <input
+//   type="text"
+//   placeholder="ingresa un Id"
+//   name="id"
+//   id="id"
+//   value={formData.id}
+//   onChange={(e) => handlerChanged(e)}
+// />
+// <p>{errorData.id}</p>
+// </div>
+
+
+
+// <label htmlFor="normal" >normal
+              
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="normal"
+//   id="types"
+//   onClick={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="fighting" >fighting
+// <input
+//   className="check"
+//   ref={refinput}
+//   type="checkbox"
+//   name="fighting"
+//   id="types"
+//   onClick={(e) => changeCheck(e)}
+// />
+
+// </label>
+// <label htmlFor="flying" >flying
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="flying"
+//   id="types"
+//   onClick={(e) => changeCheck(e)}
+// />
+// </label>
+
+
+// <label htmlFor="poison" >poison
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="poison"
+//   id="types"
+//   onClick={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="ground" >ground
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="ground"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="rock" >rock
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="rock"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="bug" >bug
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="bug"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="ghost" >ghost
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="ghost"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="steel" >steel
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="steel"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="fire" >fire
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="fire"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="water" >water
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="water"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// </label>
+
+// <label htmlFor="grass" >grass
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="grass"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="electric" >electric
+
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="electric"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// </label>
+
+// <label htmlFor="psychic" >psychic</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="psychic"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// <label htmlFor="ice" >ice</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="ice"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// <label htmlFor="dark" >dark</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="dark"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// <label htmlFor="dragon" >dragon</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="dragon"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// <label htmlFor="fairy" >fairy</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="fairy"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// <label htmlFor="unknown" >unknown</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="unknown"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+
+// <label htmlFor="shadow" >shadow</label>
+// <input
+//   className="check"
+//   type="checkbox"
+//   name="shadow"
+//   id="types"
+//   onChange={(e) => changeCheck(e)}
+// />
+// shadow
+// <p>{errorData.types}</p>

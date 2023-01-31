@@ -1,0 +1,98 @@
+.container{
+    max-width: 300px;
+    max-height: 350px;
+    width: 300%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20%;
+    border: 5px solid black;
+    margin: 1rem;
+    overflow: hidden;
+    opacity: 80%;
+}
+
+/* imagen 150
+cont name 50 
+container info 100
+link 50
+    350
+    
+    */
+    .containerImage{
+        width: 100%;
+        height: 150px;
+        padding: 0.5rem;
+        background-color: rgb(129, 231, 222);
+    
+}
+
+.containerImage img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.containerName{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(254, 91, 55);
+}
+
+/*? */
+.containerInfo{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    background-color: antiquewhite;
+}
+
+.containerStats{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerStats span {
+    
+    margin: 0 2px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.containerStats span:nth-child(even){
+    color: red;
+    font-weight: bold;
+    
+}
+.containerStats span:nth-child(odd){
+    min-width: 60px;
+    font-weight: bold;
+    text-align: left;
+    
+}
+
+.containerType{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.typeIcon{
+    width: 20px;
+}
+
+.typeIcon img {
+    width: 100%;
+}
+
+
+/*? */
+
+.containerLink{
+    height: 50px;
+}

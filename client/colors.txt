@@ -1,0 +1,20 @@
+
+
+background-color: antiquewhite;
+
+    azul
+    background-color: rgb(129, 231, 222);
+    naranja
+    background-color: rgb(254, 91, 55);
+
+    // amarillo nav bar
+    background-color:#fedf06;
+    
+
+
+
+    amarillo fondo
+    background-color:#fffdc7;
+    amarillo azul
+    background-color:#9eb6ff;
+

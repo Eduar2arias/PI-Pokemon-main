@@ -1,191 +1,264 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Types from "../pokemons/Types";
 import Checkboxs from "./Checkboxs";
 import validate from "./controllerForm";
+import style from "./createpokemon.module.css";
+import { getTypes } from "../../redux/actions/action";
+import axios from "axios";
 
 export default function Createpokemon(props) {
-  const [formData , setFormData] = useState({
+  const refinput = useRef();
+  const dispatch = useDispatch();
+  const allTypes = useSelector((store) => store.types);
+  const [formData, setFormData] = useState({
     name: "",
-    id:'',
-    types:[],
-    height:'',
-    weight:'',
-    life: '',
-    stroke:'',
-    defense:'',
-    speed:''
-  })
-  const [errorData , setErrorData] = useState({
-    name: ""
-  })
-  console.log(errorData);
+    image: "",
+    type: [],
+    height: "",
+    weight: "",
+    life: "",
+    stroke: "",
+    defense: "",
+    speed: "",
+  });
+  const [errorData, setErrorData] = useState({
+    name: "",
+    image: "",
+    type: [],
+    height: "",
+    weight: "",
+    life: "",
+    stroke: "",
+    defense: "",
+    speed: "",
+  });
+  useEffect(() => {
+    dispatch(getTypes());
+  }, []);
+  // console.log(formData);
   const handlerChanged = (e) => {
-    const property = e.target.name
-    const value = e.target.value
-    setFormData({...formData,[property]:value})
+    const property = e.target.name;
+    const value = e.target.value;
+    setFormData({ ...formData, [property]: value });
 
-    validate( {...formData,[property]: value} ,errorData,setErrorData)
+    setErrorData(validate({ ...formData, [property]: value }));
     // setErrorData(validate( {...formData,[property]: value} ));
-  }
-  const changeCheck  = (e) => {
-    let arr = []
-    const value = e.target.name
-    if (e.target.checked) {
-      arr.push(value)
-      setFormData({...formData, types:[...formData.types,value]})
-      
-    }else{
-      setFormData({...formData, types:[...formData.types.filter( e => e !== value)]})
-    }
+  };
 
+  const handlerType = (e) => {
+    console.log(e.target.value);
+    const value = e.target.value;
+    const arrType = formData.type.find((type) => type === value);
+    console.log(arrType);
+    if (!arrType) {
+      setFormData({ ...formData, type: [...formData.type, value] });
+    }
+  };
+
+  function handleForm(e){
+    console.log(formData);
+    e.preventDefault()
+    try {
+      axios.post('http://localhost:3001/pokemons',{...formData})
+      // axios({
+      //   method:'POST',
+      //   url:'http://localhost:3001/pokemons',
+      //   data:formData
+      // })
+      
+    } catch (error) {
+      console.log(error.message);
+    }
   }
-  
-  console.log(formData);
+
+  // let clasInput = document.querySelectorAll(".check");
+  // console.log(clasInput);
+  // const changeCheck = (e) => {
+  //   let limit = 0;
+  //   let arr = [];
+  //   for (let i = 0; i < clasInput.length; i++) {
+  //     if (clasInput[i].checked === true) {
+  //       limit++;
+  //     }
+
+  //   }
+
+  //   if (formData.types.length+1 > 3) {
+  //       setErrorData({ ...formData, types: "solo puedes seleccionar 3 typos" });
+  //       e.target.disabled = true
+  //       return false
+  //     }
+  //     if (formData.types.length+1 < 3) {
+  //       // e.target.disabled = false
+  //       setErrorData({ ...formData, types: "" });
+
+  //     }
+  //     console.log('pasee');
+  //     // if (limit > 3) {
+  //       //   setErrorData({ ...formData, types: "solo puedes seleccionar 3 typos" });
+  //   //   return false;
+  //   // } else {
+  //   //   setErrorData({ ...formData, types: "" });
+  //   // }
+  //   // console.log(formData.types.length+1,'asdas');
+  //   // if(formData.types.length > 3){
+  //   //   console.log('acaccaca');
+  //   // }
+  //     e.target.disabled = false
+
+  //   const value = e.target.name;
+
+  //   if (e.target.checked === true) {
+  //     // arr.push(value)
+  //     setFormData({ ...formData, types: [...formData.types, value] });
+  //   } else {
+  //     setFormData({
+  //       ...formData,
+  //       types: [...formData.types.filter((e) => e !== value)],
+  //     });
+  //   }
+  // };
+
   return (
     <div>
       <div>Createpokemon</div>
-      <form>
-        <fieldset>
-          <div>
-            <label htmlFor="name">Nombre</label>
-            <input
-              name="name"
-              id="name"
-              value={formData.name}
-              placeholder="Ingresa tu nombre"
-              onChange={(e)=>handlerChanged(e)}
-              onFocus={(e) => {
-                console.log(e.target);
-              }}
-            />
-            <p>{errorData.error_name}</p>
-          </div>
-          <div>
-            <label htmlFor="id">Id</label>
-            <input 
-            type='text'
-            placeholder="ingresa un Id" 
-            name="id"
-            id="id"
-            value={formData.id}
-            onChange={(e)=>handlerChanged(e)}
-             />
-          </div>
-          <div>
-            <label htmlFor="height">height</label>
-            <input 
-              type='number'
-              name="height"
-              id="height"
-              placeholder=""
-              value={formData.height}
-              onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-          <div>
-            <label>weight</label>
-            <input 
-              type='number'
-              name="weight"
-              id="weight"
-              placeholder=""
-              value={formData.weight}
-              onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-          <div>
-            <Checkboxs changeCheck={changeCheck}/>
-            <hr/>
-            <label htmlFor="types[]"onChange={(e)=> console.log(e.target)}>Tipos</label>
-            <input type="checkbox" name="normal" id="types" onChange={(e)=> changeCheck(e)}/>
-            normal
-            <input type="checkbox" name="fighting" id="types" onChange={(e)=> changeCheck(e)}/>
-            fighting
-            <input type="checkbox" name="flying" id="types" onChange={(e)=> changeCheck(e)}/>
-            flying
-            <input type="checkbox" name="poison" id="types" onChange={(e)=> changeCheck(e)}/>
-            poison
-            <input type="checkbox" name="ground" id="types" onChange={(e)=> changeCheck(e)}/>
-            ground
-            <input type="checkbox" name="rock" id="types" onChange={(e)=> changeCheck(e)}/>
-            rock
-            <input type="checkbox" name="bug" id="types" onChange={(e)=> changeCheck(e)}/>
-            bug
-            <input type="checkbox" name="ghost" id="types" onChange={(e)=> changeCheck(e)}/>
-            ghost
-            <input type="checkbox" name="steel" id="types" onChange={(e)=> changeCheck(e)}/>
-            steel
-            <input type="checkbox" name="fire" id="types" onChange={(e)=> changeCheck(e)}/>
-            fire
-            <input type="checkbox" name="water" id="types" onChange={(e)=> changeCheck(e)}/>
-            water
-            <input type="checkbox" name="grass" id="types" onChange={(e)=> changeCheck(e)}/>
-            grass
-            <input type="checkbox" name="electric" id="types" onChange={(e)=> changeCheck(e)}/> 
-            electric
-            <input type="checkbox" name="psychic" id="types" onChange={(e)=> changeCheck(e)}/> 
-            psychic
-            <input type="checkbox" name="ice" id="types" onChange={(e)=> changeCheck(e)}/>
-            ice
-            <input type="checkbox" name="dark" id="types" onChange={(e)=> changeCheck(e)}/>
-            dark
-            <input type="checkbox" name="fairy" id="types" onChange={(e)=> changeCheck(e)}/>
-            fairy
-            <input type="checkbox" name="unknown" id="types" onChange={(e)=> changeCheck(e)}/>
-            unknown
-            <input type="checkbox" name="shadow" id="types" onChange={(e)=> changeCheck(e)}/>
-            shadow
-            <input type="checkbox" name="types" id="types" onChange={(e)=> changeCheck(e)}/>
-            normal
-          </div> 
-        </fieldset>
-        <fieldset>
-          <legend>Estadisticas</legend>
-          <div>
-            <label htmlFor="life">life</label>
-            <input 
-              type='number'
-              name="life"
-              id="life"
-              placeholder=""
-              value={formData.life}
-              onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-          <div>
-            <label htmlFor="stroke">stroke</label>
-            <input 
-            type="number"
-            name='stroke'
-            id="stroke"
-            placeholder=""
-              value={formData.stroke}
-            onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-          <div>
-            <label htmlFor="defense">Defense</label>
-            <input 
-              type='number'
-              name="defense"
-              id="defense"
-              placeholder=""
-              value={formData.defense}
-              onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-          <div>
-            <label htmlFor="Speed">Speed</label>
-            <input 
-              type='number'
-              name="speed"
-              id="speed"
-              placeholder=""
-              value={formData.speed}
-              onChange={(e)=>handlerChanged(e)}
-            />
-          </div>
-        </fieldset>
-      </form>
+      <section className={style.container}>
+        <form className={style.form}>
+          <fieldset className={`${style.fieldset} ${style.uno}`}>
+            <legend>Informacion basica</legend>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={formData.name}
+                placeholder="Ingresa tu nombre"
+                onChange={(e) => handlerChanged(e)}
+                required
+              />
+              <p>{errorData.name}</p>
+            </div>
+            <div>
+              <label htmlFor="imagen">Image</label>
+              <input
+                type="text"
+                name="image"
+                id="imagen"
+                value={formData.image}
+                placeholder="ingresa una url de imagen"
+                onChange={(e) => handlerChanged(e)}
+                required
+              />
+              <p>{errorData.image}</p>
+            </div>
+
+            <div>
+              <label htmlFor="height">height</label>
+              <input
+                type="number"
+                name="height"
+                id="height"
+                placeholder=""
+                value={formData.height}
+                required
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.height}</p>
+            </div>
+            <div>
+              <label>weight</label>
+              <input
+                type="number"
+                name="weight"
+                id="weight"
+                placeholder=""
+                value={formData.weight}
+                required
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.weight}</p>
+            </div>
+          </fieldset>
+          <fieldset className={`${style.fieldset} ${style.dos}`}>
+            <div>
+              <h3>Types</h3>
+              <select onChange={(e) => handlerType(e)} >
+                {allTypes.map((el) => (
+                  <Types key={el.id} name={el.name} />
+                ))}
+              </select>
+              <select onChange={(e) => handlerType(e)}>
+                {allTypes.map((el) => (
+                  <Types key={el.id} name={el.name} />
+                ))}
+              </select>
+              <select onChange={(e) => handlerType(e)}>
+                {allTypes.map((el) => (
+                  <Types key={el.id} name={el.name} />
+                ))}
+              </select>
+            </div>
+          </fieldset>
+          <fieldset className={`${style.fieldset} ${style.tres}`}>
+            <legend>Estadisticas</legend>
+            <div>
+              <label htmlFor="life">life</label>
+              <input
+                type="number"
+                name="life"
+                id="life"
+                placeholder=""
+                required
+                value={formData.life}
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.life}</p>
+            </div>
+            <div>
+              <label htmlFor="stroke">stroke</label>
+              <input
+                type="number"
+                name="stroke"
+                id="stroke"
+                placeholder=""
+                required
+                value={formData.stroke}
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.stroke}</p>
+            </div>
+            <div>
+              <label htmlFor="defense">defense</label>
+              <input
+                type="number"
+                name="defense"
+                id="defense"
+                placeholder=""
+                required
+                value={formData.defense}
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.defense}</p>
+            </div>
+            <div>
+              <label htmlFor="speed">speed</label>
+              <input
+                type="number"
+                name="speed"
+                id="speed"
+                required
+                placeholder=""
+                value={formData.speed}
+                onChange={(e) => handlerChanged(e)}
+              />
+              <p>{errorData.defense}</p>
+            </div>
+          </fieldset>
+          <input type="button" value="Crear" onClick={(e) => handleForm(e)} />
+        </form>
+      </section>
     </div>
   );
 }

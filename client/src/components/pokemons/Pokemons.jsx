@@ -1,5 +1,11 @@
 //* importamos la action a utilizar
-import { addFilter, getTypes, getPokemon ,getCreated,setSorts } from "../../redux/actions/action.js";
+import {
+  addFilter,
+  getTypes,
+  getPokemon,
+  getCreated,
+  setSorts,
+} from "../../redux/actions/action.js";
 import { connect, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 import Card from "../Card/Card.jsx";
@@ -7,124 +13,128 @@ import { Link, Route } from "react-router-dom";
 import SearchByName from "../searchs/SearchByName";
 import Types from "./Types.jsx";
 import Paginated from "./Paginated.jsx";
+import style from "./pokemons.module.css";
 
 export function Pokemons(props) {
-
-  const {Pokemon,types} = props
+  const { Pokemon, types } = props;
   console.log(Pokemon);
   const [numPage, setNumPage] = useState(1);
-  const [numItem , setItems] = useState(12)
-  const [ next , setNext] = useState(true)
-  const [ prew , setPrew] = useState(false)
-  const [order , setOrder] = useState('')
-  const lastIndexItems = numPage * numItem
-  const firstIndexItems = lastIndexItems - numItem
-  console.log(firstIndexItems);
-  const pokemons = Pokemon.slice(firstIndexItems , lastIndexItems)
-  console.log(numPage , numItem , lastIndexItems , firstIndexItems );
-  
-  const numeOfPages = Math.ceil(Pokemon.length / numItem)
-  
+  const [numItem, setItems] = useState(12);
+  const [next, setNext] = useState(true);
+  const [prew, setPrew] = useState(false);
+  const [order, setOrder] = useState("");
+  const lastIndexItems = numPage * numItem;
+  const firstIndexItems = lastIndexItems - numItem;
 
-  const handlerNext= (e) => {
-    e.preventDefault()
-    if (pokemons.length < 12 || props.Pokemon === lastIndexItems){
-     return setNext(false)
+  const pokemons = Pokemon.slice(firstIndexItems, lastIndexItems);
+
+  const numeOfPages = Math.ceil(Pokemon.length / numItem);
+
+  const handlerNext = (e) => {
+    e.preventDefault();
+    if (pokemons.length < 12 || props.Pokemon === lastIndexItems) {
+      return setNext(false);
     }
-    setPrew(true)
-    setNumPage(numPage+1)
-  }
-  function handlerPrew (e){
-    e.preventDefault()
+    setPrew(true);
+    setNumPage(numPage + 1);
+  };
+  function handlerPrew(e) {
+    e.preventDefault();
     if (firstIndexItems === 0) {
-      console.log('entro');
-        return setPrew(false)
+      console.log("entro");
+      return setPrew(false);
     }
-    setNumPage(numPage-1)
+    setNumPage(numPage - 1);
+  }
 
+  function paginated(pageNumber, e) {
+    e.preventDefault();
+    setNumPage(pageNumber);
   }
-  
-  function paginated(pageNumber,e) {
-    e.preventDefault()
-    setNumPage(pageNumber)
-  }
-  
+
   const handlerSort = (e) => {
-    const value = e.target.value
-    console.log(value,'manejador');
-    props.setSorts(value)
-    setNumPage(1)
-    setOrder(`order-${value}`)
-
-  }
+    const value = e.target.value;
+    console.log(value, "manejador");
+    props.setSorts(value);
+    setNumPage(1);
+    setOrder(`order-${value}`);
+  };
   function changeCreated(e) {
-    const value = e.target.value
+    const value = e.target.value;
     // console.log(value);
-    props.getCreated(value)
-    
+    props.getCreated(value);
   }
 
   const changeType = (e) => {
-    const value = e.target.value
-        console.log(e.target);
-        console.log(value);
-        // setType(value)
-        // console.log(,'stado');
-        props.addFilter(value)
-        // setRestlApy([...props.pokemonFilter])
-        // console.log(resultApi);
-    
-      }
+    const value = e.target.value;
+    console.log(e.target);
+    console.log(value);
+    // setType(value)
+    // console.log(,'stado');
+    props.addFilter(value);
+    // setRestlApy([...props.pokemonFilter])
+    // console.log(resultApi);
+  };
   useEffect(() => {
     props.getPokemon();
-    props.getTypes()
+    props.getTypes();
   }, []);
   return (
     <div>
-    <section>
-      <label htmlFor="order">Order</label>
-      <select id="order" onChange={(e )=> handlerSort(e)}>
-        <option value='default'>----</option>
-        <option value='asc'>A-Z</option>
-        <option value='desc'>Z-A</option>
-        <option value='attack'>biggest attack</option>
-        <option value='less-attack'>least attack</option>
-      </select>
-      <label htmlFor="creat">All Pokemon</label> 
-      <select id="creat" onChange={e => changeCreated(e)}>
-        <option value='all'>ALL</option>
-        <option value='db'>BY-DB</option>
-        <option value='api'>BY-API</option>
-      </select>   
-      <label htmlFor="types">Types</label>
-      <select id="types" onChange={(e)=> changeType(e)}>
-        <option value='all' >ALL</option>
-        {types && types.map( option => 
-          <Types 
-          key = {option.id}
-          name ={option.name}/>
+      <section>
+        <label htmlFor="order">Order</label>
+        <select id="order" onChange={(e) => handlerSort(e)}>
+          <option value="default">----</option>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+          <option value="attack">biggest attack</option>
+          <option value="less-attack">least attack</option>
+        </select>
+        <label htmlFor="creat">All Pokemon</label>
+        <select id="creat" onChange={(e) => changeCreated(e)}>
+          <option value="all">ALL</option>
+          <option value="db">BY-DB</option>
+          <option value="api">BY-API</option>
+        </select>
+        <label htmlFor="types">Types</label>
+        <select id="types" onChange={(e) => changeType(e)}>
+          <option value="all">ALL</option>
+          {types &&
+            types.map((option) => <Types key={option.id} name={option.name} />)}
+        </select>
+      </section>
+      
+      <section>
+        {prew && firstIndexItems > 0 ? (
+          <Link>
+            <span onClick={(e) => handlerPrew(e)}>Prew</span>
+          </Link>
+        ) : (
+          ""
         )}
-        
-      </select>
-    </section>
-    <hr/>
-    <section>
-    {prew && firstIndexItems> 0? <Link><span onClick={(e)=>handlerPrew(e)}>Prew</span></Link> : ""}
-      <span>{numPage} of {numeOfPages}</span>
-      {next&&pokemons.length >= 12? <Link><span onClick={(e)=>handlerNext(e)}>Next</span></Link> : ""}
-
-    </section>
-      <hr/>
-      <div>
-        {pokemons && pokemons.map((el) => (
-            <Card key={el.id} id={el.id} name={el.name} />
+        <span>
+          {numPage} of {numeOfPages}
+        </span>
+        {next && pokemons.length >= 12 ? (
+          <Link>
+            <span onClick={(e) => handlerNext(e)}>Next</span>
+          </Link>
+        ) : (
+          ""
+        )}
+      </section>
+      <hr />
+      <div className={style.containerCards}>
+        {pokemons &&
+          pokemons.map((el) => (
+            <Card key={el.id} data={el} id={el.id} name={el.name} />
           ))}
       </div>
       <div>
-        <Paginated 
-        paginated={paginated}
-        pokemons ={Pokemon}
-        numItems = {numItem}  
+        <Paginated
+          paginated={paginated}
+          pokemons={Pokemon}
+          numItems={numItem}
         />
       </div>
     </div>
@@ -144,7 +154,7 @@ export const mapDispatchToProps = (dispatch) => {
     addFilter: (value) => dispatch(addFilter(value)),
     getPokemon: () => dispatch(getPokemon()),
     getCreated: (value) => dispatch(getCreated(value)),
-    setSorts: (value)=> dispatch(setSorts(value))
+    setSorts: (value) => dispatch(setSorts(value)),
   };
 };
 

@@ -6,13 +6,15 @@ import {
   GET_TYPES,
   GET_CREATED,
   GET_SORT,
+  ADD_FAVORITES,
+  DELETE_FAVORITE,
 } from "../actions/types";
 const initialState = {
   Pokemon: [],
   allPokemon: [],
   detailPokemon: {},
-  pokemonById:{},
-  favorites: new Set(),
+  pokemonById: {},
+  favorites: [],
   types: [],
   pokemonFilter: [],
 };
@@ -41,6 +43,34 @@ const apiReducer = (state = initialState, actions) => {
       return {
         ...state,
         pokemonById: actions.payload,
+      };
+    case ADD_FAVORITES:
+      console.log(actions.payload, "pay");
+
+      const favorite = state.allPokemon.find((el) => el.id === actions.payload);
+      const validateFavorite = state.favorites.find(
+        (el) => el.id === actions.payload
+      );
+      if (!validateFavorite) {
+        return  {
+          ...state,
+          favorites:[...state.favorites,favorite],
+        };
+      }
+
+      return {
+        ...state,
+        favorites: state.favorites,
+      };
+
+    case DELETE_FAVORITE:
+      const deleted = state.favorites.filter((el) => el.id !== actions.payload);
+      // state.favorites.delete(deleted);
+      console.log(deleted,'asdasdasdas');
+
+      return {
+        ...state,
+        favorites: deleted,
       };
     case SET_FILTER:
       //? nos traemos a todos los pokemones desde la copia que nunca fue afectada
@@ -85,41 +115,41 @@ const apiReducer = (state = initialState, actions) => {
           });
           return {
             ...state,
-            Pokemon:sortAsc
+            Pokemon: sortAsc,
           };
 
-          case "desc":
-
-          return{
-            ...state,Pokemon:state.Pokemon.sort( (a , b)=> {
+        case "desc":
+          return {
+            ...state,
+            Pokemon: state.Pokemon.sort((a, b) => {
               if (a.name > b.name) return -1;
               if (b.name > a.name) return 1;
               return 0;
-            })
-          }
-          case "attack":
-            return{
-              ...state,Pokemon:state.Pokemon.sort( (a , b)=> {
-                if (a.attack > b.attack) return -1;
-                if (b.attack > a.attack) return 1;
-                return 0;
-              })
-            }
-            case "less-attack":
-              return{
-                ...state,Pokemon:state.Pokemon.sort( (a , b)=> {
-                  if (a.attack > b.attack) return 1;
-                  if (b.attack > a.attack) return -1;
-                  return 0;
-                })
-              }
-            
-             
+            }),
+          };
+        case "attack":
+          return {
+            ...state,
+            Pokemon: state.Pokemon.sort((a, b) => {
+              if (a.attack > b.attack) return -1;
+              if (b.attack > a.attack) return 1;
+              return 0;
+            }),
+          };
+        case "less-attack":
+          return {
+            ...state,
+            Pokemon: state.Pokemon.sort((a, b) => {
+              if (a.attack > b.attack) return 1;
+              if (b.attack > a.attack) return -1;
+              return 0;
+            }),
+          };
 
         default:
           return { ...state };
       }
-     
+
     default:
       return { ...state };
   }
