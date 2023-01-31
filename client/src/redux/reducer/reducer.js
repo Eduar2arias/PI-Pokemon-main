@@ -79,7 +79,21 @@ const apiReducer = (state = initialState, actions) => {
       const filterTypes =
         actions.payload === "all"
           ? allPokemon
-          : allPokemon.filter((el) => el.types.includes(actions.payload));
+          : allPokemon.filter((el) =>{
+            
+            for (const type of el.types) {
+                console.log(type.name === actions.payload);
+              if (type.name === actions.payload) {
+                return true
+              }
+            }
+          }
+
+          
+            // console.log(el.types["name"]===actions.payload);
+            // return el.types.includes(actions.payload)
+          
+          );
       return {
         ...state,
         Pokemon: filterTypes,
@@ -131,8 +145,8 @@ const apiReducer = (state = initialState, actions) => {
           return {
             ...state,
             Pokemon: state.Pokemon.sort((a, b) => {
-              if (a.attack > b.attack) return -1;
-              if (b.attack > a.attack) return 1;
+              if (a.stroke > b.stroke) return -1;
+              if (b.stroke > a.stroke) return 1;
               return 0;
             }),
           };
@@ -140,8 +154,8 @@ const apiReducer = (state = initialState, actions) => {
           return {
             ...state,
             Pokemon: state.Pokemon.sort((a, b) => {
-              if (a.attack > b.attack) return 1;
-              if (b.attack > a.attack) return -1;
+              if (a.stroke > b.stroke) return 1;
+              if (b.stroke > a.stroke) return -1;
               return 0;
             }),
           };

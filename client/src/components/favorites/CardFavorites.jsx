@@ -29,7 +29,7 @@ export default function CardFavorites(props) {
         <div className={style.containerType}>
           {data.types?.map( el => 
           <div className={style.typeIcon}>
-            <img src={icons[el]}/>
+            <img src={icons[el.name]}/>
           </div>
           ) }
         </div>

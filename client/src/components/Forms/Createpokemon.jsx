@@ -45,7 +45,7 @@ export default function Createpokemon(props) {
     setErrorData(validate({ ...formData, [property]: value }));
     // setErrorData(validate( {...formData,[property]: value} ));
   };
-
+  
   const handlerType = (e) => {
     console.log(e.target.value);
     const value = e.target.value;
@@ -54,10 +54,10 @@ export default function Createpokemon(props) {
     if (!arrType) {
       setFormData({ ...formData, type: [...formData.type, value] });
     }
+    console.log(formData);
   };
 
   function handleForm(e){
-    console.log(formData);
     e.preventDefault()
     try {
       axios.post('http://localhost:3001/pokemons',{...formData})

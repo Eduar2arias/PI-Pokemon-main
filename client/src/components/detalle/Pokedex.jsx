@@ -88,7 +88,7 @@ export default function Pokedex({ data }) {
             {data.types?.map((el) => {
               return (
                 <div className={style.icon}>
-                  <span>{el}</span> <img src={icons[el]} alt={el} />
+                  <span>{el.name}</span> <img src={icons[el.name]} alt={el.name} />
                 </div>
               );
             })}

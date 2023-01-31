@@ -14,7 +14,13 @@ let getPokemon = async (name) => {
         
           let result = (await axios(`https://pokeapi.co/api/v2/pokemon/${name}`))
           .data;
-        const arrType = result.types.map((el) => el.type.name);
+        const arrType = result.types.map((el) => {
+
+          return{
+            name : el.type.name
+          }
+        }
+        );
         const arrStats = result.stats.map((el) => {
           return {
             name: el.stat.name,
@@ -59,7 +65,11 @@ let getPokemon = async (name) => {
       resultAPi.data.results.map(async (character) => {
         const name = character.name;
         const { data } = await axios.get(character.url);
-        const arrType = data.types.map((el) => el.type.name);
+        const arrType = data.types.map((el) => {
+          return{
+            name : el.type.name
+          }
+        });
         const arrStats = data.stats.map((el) => {
           return {
             name: el.stat.name,
@@ -103,7 +113,14 @@ const getById = (id) => {
     const resultApi = axios
       .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((result) => {
-        const arrType = result.data.types.map((el) => el.type.name);
+        const arrType = result.data.types.map((el) => {
+
+          return{
+            name : el.type.name
+          }
+        }
+        
+        );
         const arrStats = result.data.stats.map((el) => {
           return {
             name: el.stat.name,

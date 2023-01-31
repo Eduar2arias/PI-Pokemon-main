@@ -37,7 +37,8 @@ export default function Card(props) {
         <div className={style.containerType}>
           {data.types?.map( el => 
           <div className={style.typeIcon}>
-            <img src={icons[el]}/>
+            {console.log(icons[el.name])}
+            <img src={icons[el.name]}/>
           </div>
           ) }
         </div>
