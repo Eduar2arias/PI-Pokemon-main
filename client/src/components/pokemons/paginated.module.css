@@ -1,0 +1,29 @@
+.containerPage{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.containerPage a {
+    text-decoration: none;
+    text-align: center;
+}
+
+
+
+.li{
+    width:100%;
+    font-size: 2rem;
+    background-color:rgba(0, 0, 0, 0.247);
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    padding: 0 1rem;
+    margin: 0 auto;
+}
+
+.li:hover{
+    background-color: white;
+}
+
+
+

@@ -5,3 +5,18 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.filter{
+    font-weight: bold;
+}
+
+.filter label{
+    margin: 0 2rem;
+}
+
+.pags span{
+    display: inline-block;
+    margin: 0.3rem;
+    font-size: 1.5rem;
+}

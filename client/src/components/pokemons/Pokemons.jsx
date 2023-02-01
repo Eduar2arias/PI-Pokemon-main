@@ -6,16 +6,17 @@ import {
   getCreated,
   setSorts,
 } from "../../redux/actions/action.js";
-import { connect, useSelector } from "react-redux";
+import { connect} from "react-redux";
 import React, { useState, useEffect } from "react";
 import Card from "../Card/Card.jsx";
-import { Link, Route } from "react-router-dom";
-import SearchByName from "../searchs/SearchByName";
+import { Link } from "react-router-dom";
+
 import Types from "./Types.jsx";
 import Paginated from "./Paginated.jsx";
 import style from "./pokemons.module.css";
 
 export function Pokemons(props) {
+  //!estado general
   const { Pokemon, types } = props;
   console.log(Pokemon);
   const [numPage, setNumPage] = useState(1);
@@ -54,7 +55,6 @@ export function Pokemons(props) {
 
   const handlerSort = (e) => {
     const value = e.target.value;
-    console.log(value, "manejador");
     props.setSorts(value);
     setNumPage(1);
     setOrder(`order-${value}`);
@@ -81,7 +81,7 @@ export function Pokemons(props) {
   }, []);
   return (
     <div>
-      <section>
+      <section className={style.filter}>
         <label htmlFor="order">Order</label>
         <select id="order" onChange={(e) => handlerSort(e)}>
           <option value="default">----</option>
@@ -104,10 +104,10 @@ export function Pokemons(props) {
         </select>
       </section>
       
-      <section>
+      <section className={style.pags}>
         {prew && firstIndexItems > 0 ? (
           <Link>
-            <span onClick={(e) => handlerPrew(e)}>Prew</span>
+            <span onClick={(e) => handlerPrew(e)}>⏮️</span>
           </Link>
         ) : (
           ""
@@ -117,7 +117,7 @@ export function Pokemons(props) {
         </span>
         {next && pokemons.length >= 12 ? (
           <Link>
-            <span onClick={(e) => handlerNext(e)}>Next</span>
+            <span onClick={(e) => handlerNext(e)}>⏭️</span>
           </Link>
         ) : (
           ""
@@ -130,7 +130,7 @@ export function Pokemons(props) {
             <Card key={el.id} data={el} id={el.id} name={el.name} />
           ))}
       </div>
-      <div>
+      <div className={style.pepe}>
         <Paginated
           paginated={paginated}
           pokemons={Pokemon}
