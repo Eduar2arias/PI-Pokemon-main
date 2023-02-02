@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import style from './search.module.css'
 
 export default function SearchByName({ fnSearchByname }) {
@@ -10,10 +10,9 @@ export default function SearchByName({ fnSearchByname }) {
   
   let value;
   const fnChange = () => {
-    console.log(refName.current.value);
+  
     value = refName.current.value;
-    // value = refName.current.value
-    // fnSearchByname(refName.current.value)
+    
     setName(value);
   };
 
@@ -26,6 +25,7 @@ export default function SearchByName({ fnSearchByname }) {
             
             type="button"
             value="Search"
+            
             onClick={() => fnSearchByname(name)}
           />
         </Link>

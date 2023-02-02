@@ -96,3 +96,45 @@ link 50
 .containerLink{
     height: 50px;
 }
+
+.containerLink{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    
+}
+
+.containerLink_1, .containerLink_2{
+    width: 50%;
+    height: 100%;
+}
+
+.containerLink_1{
+    border-right: 5px solid black;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;   
+}
+
+
+
+.containerLink_1:hover{
+    background-color: rgb(71, 239, 62);
+}
+
+.containerLink_1 a {
+    /* text-decoration: none; */
+    display: inline-block;
+    width: fit-content;
+    margin: auto;
+}
+
+.containerLink_2{
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.containerLink_2:hover{
+    background-color: red;
+}

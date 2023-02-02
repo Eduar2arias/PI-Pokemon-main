@@ -10,17 +10,17 @@ export default function validate(formData) {
   } else if (formData.weight < 0 || formData.weight > 1000) {
     errors.weight =
       "debe ser un numero mayor que 0 y menor que 1000" 
-  }else if (formData.life <= 0 || formData.life > 100){
-    errors.lfe = 'los valores deben estar en el rango 1 a 100'
+  }else if (formData.life <= 10 || formData.life > 100){
+    errors.life = 'los valores deben estar en el rango 10 a 100'
   }
   else if (formData.stroke <= 0 || formData.stroke> 100){
-    errors.types = 'debes elegir al menos un typo'
+    errors.stroke = 'los valores deben estar en el rango 1 a 100'
   }
   else if (formData.defense <= 0 || formData.defense> 100){
-    errors.types = 'debes elegir al menos un typo'
+    errors.defense = 'los valores deben estar en el rango 1 a 100'
   }
   else if (formData.speed <= 0 || formData.speed> 100){
-    errors.types = 'debes elegir al menos un typo'
+    errors.speed = 'los valores deben estar en el rango 1 a 100'
   }
   
   //  height:'',

@@ -1,9 +1,10 @@
 const axios = require("axios");
+const {Type} = require('../db')
 
 
 
 
-const getType = ( Type ) => {
+const getType = (  ) => {
   const resultType = Type.findAll().then((result) => {
     if (!result.length) {
       return resltApi = axios
@@ -18,6 +19,8 @@ const getType = ( Type ) => {
       return result;
     }
   });
+
+  console.log(resultType);
   return resultType
 };
 

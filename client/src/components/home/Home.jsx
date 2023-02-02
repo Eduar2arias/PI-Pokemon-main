@@ -13,8 +13,6 @@ import style from "./home.module.css";
 import Favorites from "../favorites/Favorites";
 
 export default function Home(props) {
-
-  
   const dispatch = useDispatch();
   const fnSearchByname = (name) => {
     dispatch(getPokemon(name));
@@ -22,33 +20,38 @@ export default function Home(props) {
   return (
     <div>
       <section className={style.containHeader}>
-      <div className={style.header}>
-        
-      </div>
-        <SearchByName fnSearchByname={fnSearchByname} />
-
+        <div className={style.header}></div>
       </section>
+      <div className={style.search}>
+        <SearchByName fnSearchByname={fnSearchByname} />
+      </div>
       <section className={style.frame}>
-      
-
         <div className={style.menu}>
-          <Link className={style.link} to="/">index</Link>
-          <Link className={style.link} to="/home/pokemons">All Pokemon</Link>
-          <Link className={style.link} to="/home/create">Create Pokemon</Link>
-          <Link className={style.link} to="/home/favorites">Favorites</Link>
+          <Link className={style.link} to="/">
+            index
+          </Link>
+          <Link className={style.link} to="/home/pokemons">
+            All Pokemon
+          </Link>
+          <Link className={style.link} to="/home/create">
+            Create Pokemon
+          </Link>
+          <Link className={style.link} to="/home/favorites">
+            Favorites
+          </Link>
           <Menu />
         </div>
-      
+
         <section className={style.render}>
           <Route path="/home/pokemons">
             <Pokemon />
           </Route>
-         
+
           <Route path="/home/create">
             <Createpokemon />
           </Route>
           <Route path="/home/favorites">
-            <Favorites/>
+            <Favorites />
           </Route>
 
           <Route path="/home/detalle/:name">

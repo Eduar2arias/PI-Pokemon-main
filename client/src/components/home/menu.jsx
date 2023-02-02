@@ -19,23 +19,22 @@ export default function Menu() {
     setTypeFilter(!typeFilter);
   };
   const changeCheck = (e) => {
-    let arr = [];
+    
     const value = e.target.name;
     if (e.target.checked) {
       // arr.push(value)
       setDataFilter(value);
     } else {
       setDataFilter("");
-      // setFormData({...formData, types:[...formData.types.filter( e => e !== value)]})
     }
     dispatch(addFilter(dataFilter));
   };
-  console.log(dataFilter);
+ 
   const sendFilter = (e) => {
     dispatch(addFilter(dataFilter));
-    console.log('entre en la');
+
   };
-  console.log(filter);
+
   let menu = (
     <ul>
       <li>
@@ -62,9 +61,9 @@ export default function Menu() {
     <div>
       <ul>
         <li>
-          <a href="" onClick={(e) => fnToogleFilter(e)}>
+          <div href="" onClick={(e) => fnToogleFilter(e)}>
             filtros
-          </a>
+          </div>
           {filter ? menu : ""}
         </li>
       </ul>

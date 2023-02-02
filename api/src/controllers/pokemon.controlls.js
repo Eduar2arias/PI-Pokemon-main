@@ -7,8 +7,11 @@ let getPokemon = async (name) => {
     
       const resultDB = await Pokemon.findAll({
         where: { name },
-        include: { model: Type },
-      });
+        include: { model: Type ,
+          through: {
+            attributes: []
+          }
+  }});
 
       if (!resultDB.length) {
         
@@ -41,7 +44,7 @@ let getPokemon = async (name) => {
           stroke: attack.base_stat,
           defense: defense.base_stat,
           speed: speed.base_stat,
-          types: arrType,
+          Types: arrType,
 
           created: false,
         };
@@ -55,7 +58,9 @@ let getPokemon = async (name) => {
     
   } else {
     const resultDB = await Pokemon.findAll({
-      include: { model: Type },
+      include: { model: Type ,through: {
+        attributes: []
+      }},
     });
 
     const resultAPi = await axios.get(
@@ -90,7 +95,7 @@ let getPokemon = async (name) => {
           stroke: attack.base_stat,
           defense: defense.base_stat,
           speed: speed.base_stat,
-          types: arrType,
+          Types: arrType,
           created: false,
         };
       })
@@ -141,7 +146,7 @@ const getById = (id) => {
           stroke: attack.base_stat,
           defense: defense.base_stat,
           speed: speed.base_stat,
-          types: arrType,
+          Types: arrType,
 
           created: false,
         };
@@ -153,23 +158,36 @@ const getById = (id) => {
   }
 };
 
-const postPokenon = async (req, Pokemon, Type) => {
-  const { name, image, height ,weight,stroke,life,defense,speed, type } = req.body;
-  console.log(req.body);
+const postPokenon = async (body) => {
+  const { name, image, height ,weight,stroke,life,defense,speed, type } = body
+  
   const resultPost = await Pokemon.create({ name, image, height ,weight,stroke,life,defense,speed })
   const resultType = await Type.findAll({ where: { name: type } })
   console.log(resultType);
   console.log(resultPost,'asdsa');
 
   resultPost.addType(resultType)
-  // .then((datapokemon) => {
-    // Type.findAll({ where: { name: type } }).then((data) => {
-    //   console.log(data);
-    //   datapokemon.addType(data);
-    // });
-  // });
+
   return resultPost;
 };
+
+// const postPokenon = async (req, Pokemon, Type) => {
+//   const { name, image, height ,weight,stroke,life,defense,speed, type } = req.body;
+//   console.log(req.body);
+//   const resultPost = await Pokemon.create({ name, image, height ,weight,stroke,life,defense,speed })
+//   const resultType = await Type.findAll({ where: { name: type } })
+//   console.log(resultType);
+//   console.log(resultPost,'asdsa');
+
+//   resultPost.addType(resultType)
+//   // .then((datapokemon) => {
+//     // Type.findAll({ where: { name: type } }).then((data) => {
+//     //   console.log(data);
+//     //   datapokemon.addType(data);
+//     // });
+//   // });
+//   return resultPost;
+// };
 
 module.exports = {
   getPokemon,

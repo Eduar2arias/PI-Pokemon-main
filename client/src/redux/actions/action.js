@@ -26,7 +26,7 @@ export const getTypes= () => {
   }
 }
 export const addFilter  = (value)=> {
-    console.log(value);
+
   return {type:SET_FILTER,payload:value}
 }
 
@@ -47,9 +47,7 @@ export function setSorts (value){
 export const getPokemonById= (id) => {
   return (dispatch)=>{
     axios(`http://localhost:3001/pokemons/${id}`)
-    .then( result => 
-      { console.log(result.data);
-      dispatch({type:GET_BY_ID,payload:result.data})})
+    .then( result =>dispatch({type:GET_BY_ID,payload:result.data}))
     .catch( err=> 
       {console.log(err)
         })
@@ -59,7 +57,6 @@ export const getPokemonById= (id) => {
 
 export const getPokemon = (name) => {
   if(name){
-    console.log(name);
     return (dispatch) => {
       axios(`http://localhost:3001/pokemons?name=${name}`)
       .then(result =>{
@@ -71,7 +68,7 @@ export const getPokemon = (name) => {
     
   }else{
   return async (dispatch) => {
-    console.log("entre 2");
+
     const result = await axios.get("http://localhost:3001/pokemons");
     dispatch({ type: GET_POKEMON, payload: result.data });
     // .then( data => dispatch({type:GET_POKEMON,payload:data.data}))

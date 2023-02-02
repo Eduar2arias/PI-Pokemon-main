@@ -15,8 +15,16 @@
     margin: 0 2rem;
 }
 
+
 .pags span{
     display: inline-block;
     margin: 0.3rem;
     font-size: 1.5rem;
+    
 }
+
+.next , .prew{
+    cursor: pointer;
+}
+
+

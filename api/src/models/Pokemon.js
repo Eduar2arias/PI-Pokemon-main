@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
     weight:{
       type:DataTypes.FLOAT
     },
+    created:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:true,
+    }
   },
   {timestamps:false}
   );

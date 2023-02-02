@@ -6,7 +6,7 @@ import style from "./card.module.css";
 import {icons} from '../../assets/iconsTypes'
 
 export default function Card(props) {
-  console.log(props);
+
   const { data } = props;
   const dispatch = useDispatch();
   function handleClickId(e, id) {
@@ -17,7 +17,7 @@ export default function Card(props) {
   return (
     <div className={style.container}>
       <div className={style.containerImage}>
-        <img src={data.image} />
+        <img src={data.image} alt={data.name} />
       </div>
       <div className={style.containerName}>
         <div>name : {data.name}</div>
@@ -35,10 +35,10 @@ export default function Card(props) {
           </div>
         </div>
         <div className={style.containerType}>
-          {data.types?.map( el => 
+          {data.Types?.map( el => 
           <div className={style.typeIcon}>
-            {console.log(icons[el.name])}
-            <img src={icons[el.name]}/>
+              
+            <img key={el.name} src={icons[el.name]} alt={el.name}/>
           </div>
           ) }
         </div>

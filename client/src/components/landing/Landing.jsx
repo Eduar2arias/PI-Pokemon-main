@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
-import Home from "../home/Home";
 import style from "./landing.module.css";
 import imgIndex from "../../assets/Logo_Pokémon_Presents.png";
 

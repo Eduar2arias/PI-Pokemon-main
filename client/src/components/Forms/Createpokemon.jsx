@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {  useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Types from "../pokemons/Types";
-import Checkboxs from "./Checkboxs";
 import validate from "./controllerForm";
 import style from "./createpokemon.module.css";
 import { getTypes } from "../../redux/actions/action";
 import axios from "axios";
 
 export default function Createpokemon(props) {
-  const refinput = useRef();
+  
   const dispatch = useDispatch();
   const allTypes = useSelector((store) => store.types);
   const [formData, setFormData] = useState({
@@ -35,7 +34,7 @@ export default function Createpokemon(props) {
   });
   useEffect(() => {
     dispatch(getTypes());
-  }, []);
+  }, [dispatch]);
   // console.log(formData);
   const handlerChanged = (e) => {
     const property = e.target.name;
@@ -47,78 +46,45 @@ export default function Createpokemon(props) {
   };
   
   const handlerType = (e) => {
-    console.log(e.target.value);
+   
     const value = e.target.value;
     const arrType = formData.type.find((type) => type === value);
-    console.log(arrType);
+   
     if (!arrType) {
       setFormData({ ...formData, type: [...formData.type, value] });
     }
-    console.log(formData);
+    // console.log(formData.type.length+1);
+    // if (formData.type.length+1 < 1) {
+    //   console.log('error');
+    //   setErrorData({...errorData,type:'debes seleccionar al menos un tipo'})
+    // }else{
+    //   setErrorData({...errorData,type:''})
+    // }
   };
-
+  // alert('asdsa')
   function handleForm(e){
+
+    for (const form in formData) {
+      console.log(form);
+      console.log(!formData[form]);
+
+      if(!formData[form] || !formData[form].length){
+        return alert(`falta por ingresar dato en la casilla ${form}`)
+      }
+    }
+
+    console.log(formData); 
     e.preventDefault()
     try {
       axios.post('http://localhost:3001/pokemons',{...formData})
-      // axios({
-      //   method:'POST',
-      //   url:'http://localhost:3001/pokemons',
-      //   data:formData
-      // })
       
     } catch (error) {
-      console.log(error.message);
+      console.log('entre');
+      alert('no se pudo enviar el formulario')
     }
   }
 
-  // let clasInput = document.querySelectorAll(".check");
-  // console.log(clasInput);
-  // const changeCheck = (e) => {
-  //   let limit = 0;
-  //   let arr = [];
-  //   for (let i = 0; i < clasInput.length; i++) {
-  //     if (clasInput[i].checked === true) {
-  //       limit++;
-  //     }
-
-  //   }
-
-  //   if (formData.types.length+1 > 3) {
-  //       setErrorData({ ...formData, types: "solo puedes seleccionar 3 typos" });
-  //       e.target.disabled = true
-  //       return false
-  //     }
-  //     if (formData.types.length+1 < 3) {
-  //       // e.target.disabled = false
-  //       setErrorData({ ...formData, types: "" });
-
-  //     }
-  //     console.log('pasee');
-  //     // if (limit > 3) {
-  //       //   setErrorData({ ...formData, types: "solo puedes seleccionar 3 typos" });
-  //   //   return false;
-  //   // } else {
-  //   //   setErrorData({ ...formData, types: "" });
-  //   // }
-  //   // console.log(formData.types.length+1,'asdas');
-  //   // if(formData.types.length > 3){
-  //   //   console.log('acaccaca');
-  //   // }
-  //     e.target.disabled = false
-
-  //   const value = e.target.name;
-
-  //   if (e.target.checked === true) {
-  //     // arr.push(value)
-  //     setFormData({ ...formData, types: [...formData.types, value] });
-  //   } else {
-  //     setFormData({
-  //       ...formData,
-  //       types: [...formData.types.filter((e) => e !== value)],
-  //     });
-  //   }
-  // };
+ 
 
   return (
     <div>
@@ -138,7 +104,7 @@ export default function Createpokemon(props) {
                 onChange={(e) => handlerChanged(e)}
                 required
               />
-              <p>{errorData.name}</p>
+              <p className={style.warning}>{errorData.name}</p>
             </div>
             <div>
               <label htmlFor="imagen">Image</label>
@@ -151,7 +117,7 @@ export default function Createpokemon(props) {
                 onChange={(e) => handlerChanged(e)}
                 required
               />
-              <p>{errorData.image}</p>
+              <p className={style.warning}>{errorData.image}</p>
             </div>
 
             <div>
@@ -165,7 +131,7 @@ export default function Createpokemon(props) {
                 required
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.height}</p>
+              <p className={style.warning}>{errorData.height}</p>
             </div>
             <div>
               <label>weight</label>
@@ -178,13 +144,14 @@ export default function Createpokemon(props) {
                 required
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.weight}</p>
+              <p className={style.warning}>{errorData.weight}</p>
             </div>
           </fieldset>
           <fieldset className={`${style.fieldset} ${style.dos}`}>
             <div>
               <h3>Types</h3>
               <select onChange={(e) => handlerType(e)} >
+                <option>None</option>
                 {allTypes.map((el) => (
                   <Types key={el.id} name={el.name} />
                 ))}
@@ -199,10 +166,11 @@ export default function Createpokemon(props) {
                   <Types key={el.id} name={el.name} />
                 ))}
               </select>
+              <p>{errorData.type}</p>
             </div>
           </fieldset>
           <fieldset className={`${style.fieldset} ${style.tres}`}>
-            <legend>Estadisticas</legend>
+            <legend>Stats</legend>
             <div>
               <label htmlFor="life">life</label>
               <input
@@ -214,7 +182,7 @@ export default function Createpokemon(props) {
                 value={formData.life}
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.life}</p>
+              <p className={style.warning}>{errorData.life}</p>
             </div>
             <div>
               <label htmlFor="stroke">stroke</label>
@@ -227,7 +195,7 @@ export default function Createpokemon(props) {
                 value={formData.stroke}
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.stroke}</p>
+              <p className={style.warning}>{errorData.stroke}</p>
             </div>
             <div>
               <label htmlFor="defense">defense</label>
@@ -240,7 +208,7 @@ export default function Createpokemon(props) {
                 value={formData.defense}
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.defense}</p>
+              <p className={style.warning}>{errorData.defense}</p>
             </div>
             <div>
               <label htmlFor="speed">speed</label>
@@ -253,7 +221,7 @@ export default function Createpokemon(props) {
                 value={formData.speed}
                 onChange={(e) => handlerChanged(e)}
               />
-              <p>{errorData.defense}</p>
+              <p className={style.warning}>{errorData.speed}</p>
             </div>
           </fieldset>
           <input type="button" value="Crear" onClick={(e) => handleForm(e)} />

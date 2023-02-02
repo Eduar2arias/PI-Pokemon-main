@@ -16,10 +16,16 @@
     /* object-fit: contain; */
 }
 
+.search{
+    position: sticky;
+    top: 0;
+    background-color:#4b77ff;
+    z-index: 999;
+}
 
 .frame{
     display: flex;
-    
+   
 }
 
 
@@ -32,6 +38,9 @@
     background-color: #9eb6ff;
     align-items: center;
     padding-top: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    
 }
 
 .link {

@@ -8,8 +8,8 @@ import {
 } from "../../redux/actions/action.js";
 import { connect} from "react-redux";
 import React, { useState, useEffect } from "react";
-import Card from "../Card/Card.jsx";
-import { Link } from "react-router-dom";
+import Card from "../Card/Card";
+
 
 import Types from "./Types.jsx";
 import Paginated from "./Paginated.jsx";
@@ -18,18 +18,19 @@ import style from "./pokemons.module.css";
 export function Pokemons(props) {
   //!estado general
   const { Pokemon, types } = props;
-  console.log(Pokemon);
+ 
   const [numPage, setNumPage] = useState(1);
   const [numItem, setItems] = useState(12);
   const [next, setNext] = useState(true);
   const [prew, setPrew] = useState(false);
   const [order, setOrder] = useState("");
+  // const [totalPages,seTotalPages] = useState(Pokemon.length)
   const lastIndexItems = numPage * numItem;
   const firstIndexItems = lastIndexItems - numItem;
 
   const pokemons = Pokemon.slice(firstIndexItems, lastIndexItems);
 
-  const numeOfPages = Math.ceil(Pokemon.length / numItem);
+
 
   const handlerNext = (e) => {
     e.preventDefault();
@@ -61,24 +62,22 @@ export function Pokemons(props) {
   };
   function changeCreated(e) {
     const value = e.target.value;
-    // console.log(value);
     props.getCreated(value);
   }
 
   const changeType = (e) => {
     const value = e.target.value;
-    console.log(e.target);
-    console.log(value);
-    // setType(value)
-    // console.log(,'stado');
     props.addFilter(value);
-    // setRestlApy([...props.pokemonFilter])
-    // console.log(resultApi);
   };
+
   useEffect(() => {
+  
     props.getPokemon();
     props.getTypes();
+   
+
   }, []);
+
   return (
     <div>
       <section className={style.filter}>
@@ -106,19 +105,19 @@ export function Pokemons(props) {
       
       <section className={style.pags}>
         {prew && firstIndexItems > 0 ? (
-          <Link>
-            <span onClick={(e) => handlerPrew(e)}>⏮️</span>
-          </Link>
+          
+            <span className={style.next} onClick={(e) => handlerPrew(e)}>⏮️</span>
+         
         ) : (
           ""
         )}
         <span>
-          {numPage} of {numeOfPages}
+          {numPage}
         </span>
         {next && pokemons.length >= 12 ? (
-          <Link>
-            <span onClick={(e) => handlerNext(e)}>⏭️</span>
-          </Link>
+          
+            <span className={style.prew} onClick={(e) => handlerNext(e)}>⏭️</span>
+          
         ) : (
           ""
         )}

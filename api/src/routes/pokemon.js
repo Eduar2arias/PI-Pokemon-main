@@ -4,7 +4,7 @@ const axios = require("axios");
 // const { getPokemon , getById , postPokenon} = require("../controllers/pokemon.controlls");
 const { Pokemon, Type } = require("../db");
 const { getPokemon , getById , postPokenon} = require("../controllers/pokemon.controlls");
-const {getPokemonHandler ,getByIdHandler} = require('../handlers/pokemon.handler')
+const {getPokemonHandler ,getByIdHandler, postPokemonHandler} = require('../handlers/pokemon.handler')
 const pokemonRoute = Router();
 
 function fnResolve(res, codigo, data) {
@@ -35,12 +35,14 @@ pokemonRoute
   //   .catch( err => fnReject( res,404,err) )
   // })
 
-  .post("/", (req, res) => {
-    const result = postPokenon(req , Pokemon , Type)
-    result
-    .then( data => fnResolve(res,200,data))
-    .catch( err => fnReject(res , 404 , err))
-  });
+  .post("/",postPokemonHandler)
+
+  // .post("/", (req, res) => {
+  //   const result = postPokenon(req , Pokemon , Type)
+  //   result
+  //   .then( data => fnResolve(res,200,data))
+  //   .catch( err => fnReject(res , 404 , err))
+  // });
 
 module.exports = {
   pokemonRoute,

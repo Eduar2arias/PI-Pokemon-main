@@ -4,29 +4,28 @@ import { icons } from "../../assets/iconsTypes.js";
 import {addFavorite, getPokemon} from '../../redux/actions/action.js'
 import { useDispatch } from "react-redux";
 export default function Pokedex({ data }) {
-  console.log(data, "info");
   const [colorHeart, setColorHeart] =useState(false)
   const [toogle, setToogle] =useState(true)
   const dispatch = useDispatch()
-  let toogles = true
-  let toogleHeart = false
+ 
+  
 
   useEffect(()=>{
     dispatch(getPokemon())
     
-  },[])
+  },[dispatch])
   const btnAdd =(e , id)=>{
     
     if (toogle) {
-      console.log('holis');
-      toogleHeart = !toogleHeart
+     
+      // toogleHeart = !toogleHeart
       setToogle(false)
       // toogle =!toogle
       
       setColorHeart(true)
       dispatch(addFavorite(id))
 
-      console.log(toogleHeart);
+      // console.log(toogleHeart);
 
     }else{
       console.log('pasee');
@@ -85,7 +84,7 @@ export default function Pokedex({ data }) {
             <p>Type</p>
           </div>
           <div className={style.containerIcon}>
-            {data.types?.map((el) => {
+            {data.Types?.map((el) => {
               return (
                 <div className={style.icon}>
                   <span>{el.name}</span> <img src={icons[el.name]} alt={el.name} />

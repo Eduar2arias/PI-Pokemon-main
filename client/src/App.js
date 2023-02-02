@@ -1,29 +1,18 @@
 // import "./App.css";
-import { Route, Link } from "react-router-dom";
+import { Route} from "react-router-dom";
 import  Home from './components/home/Home.jsx'
-import { connect } from "react-redux";
-import { getPokemon } from "./redux/actions/action";
+
 import React from "react";
-import landing from './assets/landing.jpg'
-import style from './App.css'
+// import landing from './assets/landing.jpg'
+import  './App.css'
 import Landing from "./components/landing/Landing.jsx";
 
 export default function App(props) {
-  // const {Pokemon} = props
-  
-  // React.useEffect( ()=>{
-  //   console.log('me subo')
-  //     props.getPokemon()
-  // },[])
+
   return (
     <div className="App">
-      {/* <img src={landing}/> */}
       <Route path="/" exact>
       <Landing/>
-        {/* <h1>Henry Pokemon</h1>
-        <Link to="/home/pokemons">
-          <input type="button" value="Start!" />
-        </Link> */}
       </Route>
 
       <Route path='/home'>
