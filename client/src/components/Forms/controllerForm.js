@@ -4,23 +4,23 @@ export default function validate(formData) {
     errors.name = "field requires a name";
     
   }else if ( !/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg|.webp|.gif)(\?[^\s[",><]*)?/g.test(formData.image)){
-    errors.image = 'la imagen debe ser formato .png .jpg .jpeg .webp .gif'
+    errors.image = 'url field requires format .png .jpg .jpeg .webp .gif'
   }  else if (formData.height <= 0 || formData.height > 30) {
-    errors.height = "debe ser un numero entre 0 y 30";
-  } else if (formData.weight < 0 || formData.weight > 1000) {
+    errors.height = "must be a number greater than 0 and less than 30";
+  } else if (formData.weight <= 0 || formData.weight > 1000) {
     errors.weight =
-      "debe ser un numero mayor que 0 y menor que 1000" 
+      "must be a number greater than 0 and less than 1000" 
   }else if (formData.life <= 10 || formData.life > 100){
-    errors.life = 'los valores deben estar en el rango 10 a 100'
+    errors.life = 'number must be greater than 10 and less than 100'
   }
   else if (formData.stroke <= 0 || formData.stroke> 100){
-    errors.stroke = 'los valores deben estar en el rango 1 a 100'
+    errors.stroke = 'number must be greater than 0 and less than 100'
   }
   else if (formData.defense <= 0 || formData.defense> 100){
-    errors.defense = 'los valores deben estar en el rango 1 a 100'
+    errors.defense = 'number must be greater than 0 and less than 100'
   }
   else if (formData.speed <= 0 || formData.speed> 100){
-    errors.speed = 'los valores deben estar en el rango 1 a 100'
+    errors.speed = 'number must be greater than 0 and less than 100'
   }
   
   //  height:'',

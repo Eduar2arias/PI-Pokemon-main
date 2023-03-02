@@ -88,6 +88,7 @@ export function Pokemons(props) {
           <option value="desc">Z-A</option>
           <option value="attack">biggest attack</option>
           <option value="less-attack">least attack</option>
+          <option value="less">less-70</option>
         </select>
         <label htmlFor="creat">All Pokemon</label>
         <select id="creat" onChange={(e) => changeCreated(e)}>

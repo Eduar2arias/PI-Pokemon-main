@@ -100,7 +100,7 @@ export default function Createpokemon(props) {
                 name="name"
                 id="name"
                 value={formData.name}
-                placeholder="Ingresa tu nombre"
+                placeholder="enter a name"
                 onChange={(e) => handlerChanged(e)}
                 required
               />
@@ -113,7 +113,7 @@ export default function Createpokemon(props) {
                 name="image"
                 id="imagen"
                 value={formData.image}
-                placeholder="ingresa una url de imagen"
+                placeholder="enter a url"
                 onChange={(e) => handlerChanged(e)}
                 required
               />
@@ -126,7 +126,7 @@ export default function Createpokemon(props) {
                 type="number"
                 name="height"
                 id="height"
-                placeholder=""
+                placeholder="enter a height"
                 value={formData.height}
                 required
                 onChange={(e) => handlerChanged(e)}
@@ -139,7 +139,7 @@ export default function Createpokemon(props) {
                 type="number"
                 name="weight"
                 id="weight"
-                placeholder=""
+                placeholder="enter a weight"
                 value={formData.weight}
                 required
                 onChange={(e) => handlerChanged(e)}
@@ -177,7 +177,7 @@ export default function Createpokemon(props) {
                 type="number"
                 name="life"
                 id="life"
-                placeholder=""
+                placeholder="enter life"
                 required
                 value={formData.life}
                 onChange={(e) => handlerChanged(e)}
@@ -185,12 +185,12 @@ export default function Createpokemon(props) {
               <p className={style.warning}>{errorData.life}</p>
             </div>
             <div>
-              <label htmlFor="stroke">stroke</label>
+              <label htmlFor="stroke">attack</label>
               <input
                 type="number"
                 name="stroke"
                 id="stroke"
-                placeholder=""
+                placeholder="enter attack"
                 required
                 value={formData.stroke}
                 onChange={(e) => handlerChanged(e)}
@@ -203,7 +203,7 @@ export default function Createpokemon(props) {
                 type="number"
                 name="defense"
                 id="defense"
-                placeholder=""
+                placeholder="enter defense"
                 required
                 value={formData.defense}
                 onChange={(e) => handlerChanged(e)}
@@ -217,7 +217,7 @@ export default function Createpokemon(props) {
                 name="speed"
                 id="speed"
                 required
-                placeholder=""
+                placeholder="enter speed"
                 value={formData.speed}
                 onChange={(e) => handlerChanged(e)}
               />

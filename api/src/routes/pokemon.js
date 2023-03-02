@@ -16,14 +16,9 @@ function fnReject(res, codigo, data) {
 
 let sendResult = [];
 pokemonRoute
-  // .get("/", getPokemonHandler)
+
   .get("/", getPokemonHandler)
-  // .get("/", (req, res) => {
-  //   let result = getPokemon(req, Pokemon,Type);
-  //   result
-  //     .then((data) => fnResolve(res, 200, data))
-  //     .catch((err) => res.status(404).json(err.message) );
-  // })
+ 
 
 
   .get("/:id",getByIdHandler)

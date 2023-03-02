@@ -8,6 +8,7 @@ import {
   GET_SORT,
   ADD_FAVORITES,
   DELETE_FAVORITE,
+  FILTER_BY_ATTACK,
 } from "../actions/types";
 const initialState = {
   Pokemon: [],
@@ -29,7 +30,6 @@ const apiReducer = (state = initialState, actions) => {
         allPokemon: actions.payload,
       };
     case GET_BY_NAME:
-
       return {
         ...state,
         detailPokemon: actions.payload,
@@ -52,9 +52,9 @@ const apiReducer = (state = initialState, actions) => {
         (el) => el.id === actions.payload
       );
       if (!validateFavorite) {
-        return  {
+        return {
           ...state,
-          favorites:[...state.favorites,favorite],
+          favorites: [...state.favorites, favorite],
         };
       }
 
@@ -66,7 +66,6 @@ const apiReducer = (state = initialState, actions) => {
     case DELETE_FAVORITE:
       const deleted = state.favorites.filter((el) => el.id !== actions.payload);
       // state.favorites.delete(deleted);
-  
 
       return {
         ...state,
@@ -79,21 +78,18 @@ const apiReducer = (state = initialState, actions) => {
       const filterTypes =
         actions.payload === "all"
           ? allPokemon
-          : allPokemon.filter((el) =>{
-            
-            for (const type of el.Types) {
-
-              if (type.name === actions.payload) {
-                return true
+          : allPokemon.filter(
+              (el) => {
+                for (const type of el.Types) {
+                  if (type.name === actions.payload) {
+                    return true;
+                  }
+                }
               }
-            }
-          }
 
-          
-            // console.log(el.types["name"]===actions.payload);
-            // return el.types.includes(actions.payload)
-          
-          );
+              // console.log(el.types["name"]===actions.payload);
+              // return el.types.includes(actions.payload)
+            );
       return {
         ...state,
         Pokemon: filterTypes,
@@ -105,7 +101,7 @@ const apiReducer = (state = initialState, actions) => {
           const filterCreated = allPokemonCreated.filter(
             (el) => el.created === true
           );
- 
+
           return {
             ...state,
             Pokemon: filterCreated,
@@ -117,7 +113,7 @@ const apiReducer = (state = initialState, actions) => {
           };
 
         default:
-          return { ...state,Pokemon:allPokemonCreated};
+          return { ...state, Pokemon: allPokemonCreated };
       }
     case GET_SORT:
       switch (actions.payload) {
@@ -150,6 +146,7 @@ const apiReducer = (state = initialState, actions) => {
               return 0;
             }),
           };
+
         case "less-attack":
           return {
             ...state,
@@ -158,6 +155,17 @@ const apiReducer = (state = initialState, actions) => {
               if (b.stroke > a.stroke) return -1;
               return 0;
             }),
+          };
+        case "less":
+          const byAttack = state.allPokemon;
+          console.log(byAttack);
+          const filterAtack =
+            actions.payload === "less"
+              ? byAttack.filter((el) => el.stroke < 70)
+              : byAttack;
+          return {
+            ...state,
+            Pokemon: filterAtack,
           };
 
         default:
